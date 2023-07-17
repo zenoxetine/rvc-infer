@@ -192,46 +192,44 @@ if __name__ == '__main__':
                     infer_audio_output, infer_path_output
                 ])
         with gr.Tab("download"):
-            with gr.Group():
-                with gr.Row():
-                    with gr.Column():
-                        youtube_url = gr.Textbox(label="Download audio from youtube", placeholder="https://www.youtube.com/watch?v=NAId7IP2bR4" ,interactive=True)
-                        separate_mode = gr.Checkbox(value=True, label="separate vocals")
-                        separate_process_btn = gr.Button("separate", variant="primary")
-                        yt_download_btn = gr.Button("convert", visible=False, variant="primary")
-                    with gr.Column():
-                        yt_download_output = gr.Audio(label="audio output", visible=False)
-                        yt_download_path_output = gr.Textbox(label="", visible=False, show_copy_button=True)
-                        demucs_vocals_output = gr.Audio(label="vocals output")
-                        vocals_path_output = gr.Textbox(label="", show_copy_button=True)
-                        demucs_no_vocals_output = gr.Audio(label="no vocals output")
-                        no_vocals_path_output = gr.Textbox(label="", show_copy_button=True)
+            with gr.Row():
+                with gr.Column():
+                    youtube_url = gr.Textbox(label="Download audio from youtube", placeholder="https://www.youtube.com/watch?v=NAId7IP2bR4" ,interactive=True)
+                    separate_mode = gr.Checkbox(value=True, label="separate vocals")
+                    separate_process_btn = gr.Button("separate", variant="primary")
+                    yt_download_btn = gr.Button("convert", visible=False, variant="primary")
+                with gr.Column():
+                    yt_download_output = gr.Audio(label="audio output", visible=False)
+                    yt_download_path_output = gr.Textbox(label="", visible=False, show_copy_button=True)
+                    demucs_vocals_output = gr.Audio(label="vocals output")
+                    vocals_path_output = gr.Textbox(label="", show_copy_button=True)
+                    demucs_no_vocals_output = gr.Audio(label="no vocals output")
+                    no_vocals_path_output = gr.Textbox(label="", show_copy_button=True)
 
-                    separate_mode.change(change_sep_mode, [separate_mode], [
-                        separate_process_btn, yt_download_btn,
-                        yt_download_output, yt_download_path_output,
-                        demucs_vocals_output, vocals_path_output,
-                        demucs_no_vocals_output, no_vocals_path_output
-                    ])
-                    
-                    yt_download_btn.click(
-                        fn=download_audio_from_yt,
-                        inputs=[separate_mode, youtube_url],
-                        outputs=[yt_download_output, yt_download_path_output]
-                    )
-                    separate_process_btn.click(
-                        fn=download_audio_from_yt,
-                        inputs=[separate_mode, youtube_url],
-                        outputs=[demucs_vocals_output, demucs_no_vocals_output, vocals_path_output, no_vocals_path_output]
-                    )
-            with gr.Group():
-                with gr.Row():
-                    with gr.Column():
-                        model_url = gr.Textbox(label="Save/extract model from url", placeholder="https://huggxample.com/RVC/cute_femboy_voice_model.zip", interactive=True)
-                        unzip_mode = gr.Checkbox(value=True, label="unzip")
-                        download_model_btn = gr.Button("download", variant="primary")
-                    downloaded_model_output = gr.TextArea(label="", interactive=False)
-                    download_model_btn.click(fn=download_model_from_url, inputs=[model_url, unzip_mode], outputs=[downloaded_model_output])
+                separate_mode.change(change_sep_mode, [separate_mode], [
+                    separate_process_btn, yt_download_btn,
+                    yt_download_output, yt_download_path_output,
+                    demucs_vocals_output, vocals_path_output,
+                    demucs_no_vocals_output, no_vocals_path_output
+                ])
+                
+                yt_download_btn.click(
+                    fn=download_audio_from_yt,
+                    inputs=[separate_mode, youtube_url],
+                    outputs=[yt_download_output, yt_download_path_output]
+                )
+                separate_process_btn.click(
+                    fn=download_audio_from_yt,
+                    inputs=[separate_mode, youtube_url],
+                    outputs=[demucs_vocals_output, demucs_no_vocals_output, vocals_path_output, no_vocals_path_output]
+                )
+            with gr.Row():
+                with gr.Column():
+                    model_url = gr.Textbox(label="Save/extract model from url", placeholder="https://huggxample.com/RVC/cute_femboy_voice_model.zip", interactive=True)
+                    unzip_mode = gr.Checkbox(value=True, label="unzip")
+                    download_model_btn = gr.Button("download", variant="primary")
+                downloaded_model_output = gr.TextArea(label="", interactive=False)
+                download_model_btn.click(fn=download_model_from_url, inputs=[model_url, unzip_mode], outputs=[downloaded_model_output])
 
     print("[*] starting gradio ...")
     app.launch(share=args.share)
