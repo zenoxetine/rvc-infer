@@ -1,0 +1,7 @@
+/__pycache__
+/audio/
+/infer_pack/__pycache__
+/models/
+/outputs/
+/result/
+/hubert_base.pt
