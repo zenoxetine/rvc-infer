@@ -51,9 +51,12 @@ class Inference:
         self.ready = False
         # clean last model if exist
         if (self.model != None):
-            del self.model
-            del self.vc
-            del self.net_g
+            #del self.model
+            #del self.vc
+            #del self.net_g
+            self.model = None
+            self.vc = None
+            self.net_g = None
             self.pth_file = ""
 
         print("[*] loading pth %s"%pth_file)
