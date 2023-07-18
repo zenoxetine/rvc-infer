@@ -190,7 +190,7 @@ if __name__ == '__main__':
                     model_list, audio_input_path, transpose, pitch_algorithm, ret_ratio
                 ], outputs=[
                     infer_audio_output, infer_path_output
-                ])
+                ], queue=True)
         with gr.Tab("download"):
             with gr.Row():
                 with gr.Column():
