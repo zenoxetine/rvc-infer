@@ -232,4 +232,5 @@ if __name__ == '__main__':
                 download_model_btn.click(fn=download_model_from_url, inputs=[model_url, unzip_mode], outputs=[downloaded_model_output])
 
     print("[*] starting gradio ...")
+    app.queue(concurrency_count=4)
     app.launch(share=args.share)
