@@ -114,14 +114,14 @@ def download_model_from_url(url="", unzip=True):
     if (unzip):
         if (url.startswith("http")):
             temp_file = gen_random_string()
-            printed_output += execute(f"wget -O {temp_file}.zip {url}")
+            printed_output += execute(f"wget -nv -O {temp_file}.zip {url}")
             printed_output += execute(f"unzip {temp_file}.zip -d ./models/")
             os.remove(f"{temp_file}.zip")
         else:
             printed_output += execute(f"unzip {url} -d ./models/")
     else:
         if (url.startswith("http")):
-            printed_output += execute(f"wget -P ./models {url}")
+            printed_output += execute(f"wget -nv -P ./models {url}")
         else:
             raise gr.Error("INVALID INPUT!")
 
